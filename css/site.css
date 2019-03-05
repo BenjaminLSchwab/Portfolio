@@ -1,37 +1,8 @@
-body{
-   
-    
-    font-size: 3em;
-    text-align: center;
-}
 
-html{
-    text-align: center;
-}
-
-p{
-    max-width: 400px;
-    margin: auto;
-}
-
-/*Setting initial positions apart*/
-#BigYellowCircle{
-    background-image: url(https://www.kirupa.com/images/yellow_circle.svg);
-    background-size: 45%;
-    background-position: 80% 15%;
-}
-
-#GreenPentagon{
-    background-image: url(https://www.kirupa.com/images/green_pentagon.svg);
-    background-size: 30%;
-    background-position: 20% 10%;
-
-}
-
-#BlueSquare{
-    background-image: url(https://www.kirupa.com/images/blue_square.svg);
-    background-size: 15%;
-    background-position: center 19%;
+nav{
+    background-color: cornflowerblue;
+    border: 1em;
+    width: 20%;
 }
 
 div{
@@ -44,4 +15,10 @@ div{
     left: 0;
     opacity: .4;
     z-index: -10;
+}
+
+#Background1{
+    background-image: url(https://www.kirupa.com/images/blue_square.svg);
+    background-size: 15%;
+    background-position: center 19%;
 }
