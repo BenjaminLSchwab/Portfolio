@@ -1,0 +1,35 @@
+
+nav{
+    background-color: cornflowerblue;
+    border: 1em;
+    width: 20%;
+}
+
+.animated{
+    margin: auto;
+    background-repeat: no-repeat;
+    position: fixed; /*This keeps the elemets in a set position compared to scroll, without reference to page content*/
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -10;
+}
+
+
+
+.backgroundforParralax{
+    height: 300%;
+}
+
+#BlueSquare{
+    background-image: url(../images/BlueSquare.png);
+    background-size: 15%;
+    background-position: center 55%;
+}
+
+#GreySquare{
+    background-image: url(../images/GreySquare.png);
+    background-size: 10%;
+    background-position: center 45%;
+}
