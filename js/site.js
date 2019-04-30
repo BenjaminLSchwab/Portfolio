@@ -16,11 +16,11 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
     OrbitCounter();
 
     yScrollPos = window.scrollY; //get scrollbar position
-    var GreySquarexVal = 500 * Math.sin(counter * 0.4);
+    var GreySquarexVal = 70 * Math.sin(counter * 0.4);
     //  parallaxTranslate(-0.2, BigYellowCircle); //negative because scrollbar moves down and I want the element to move up
     //  parallaxTranslate(-0.4, GreenPentagon);
     parallaxTranslate(-0.6, BlueSquare);
-    GreySquare.style.transform = "translate(" + GreySquarexVal + "px, "+GreySquarexVal * .1+"px)";
+    GreySquare.style.transform = "translate(" + GreySquarexVal + "em, "+GreySquarexVal * .1+"em)";
     swapZ(GreySquare, 100, CountingUp);
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
@@ -28,13 +28,13 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  
  //Translates an object using element style
  function parallaxTranslate(parallaxValue, el){
-     el.style.transform = "translate3d(0, " + yScrollPos * parallaxValue + "px, 0)" ; 
+     el.style.transform = "translate3d(0, " + yScrollPos * parallaxValue + "em, 0)" ; 
  }
 
  function OrbitCounter(){
      var percentToGoal = Math.abs( counter / (Math.PI/2));
     //  Display.innerHTML = percentToGoal;
-     var slow = Math.max( 1 - (percentToGoal * .8), 0.2);
+     var slow = Math.max( 1 - (percentToGoal * .8), 0.2) * 1.5;
 
 
      if(Math.abs(counter) > (Math.PI/2)){
@@ -57,6 +57,32 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
         obj.style.zIndex = -zVal;
     }
  }
+
+ function PointOnCircle(radians, radius){
+    var xpos = radius * Math.sin(radians);
+    var ypos = radius * Math.cos(radians);
+    return {xpos, ypos};
+ }
+
+ function GetRadianForOrbit(start, speed = 1, slowIntesity = 1, slowSpread = 0, eccentricity = 1){
+    var increment = (2 * Math.PI);
+    increment *= .01;
+    increment *= speed;
+
+   var distanceToEdge = Math.min(Math.abs(start - (2* Math.PI)), Math.abs(start - Math.PI));
+   var usingEccentricity = (Math.abs(start - (2* Math.PI)) > Math.abs(start - Math.PI) );
+
+   if(distanceToEdge < slowSpread){ 
+      increment *= (slowIntesity * distanceToEdge);
+   }
+
+   if(usingEccentricity){
+      increment *= eccentricity;
+   }
+
+   return start + increment;
+ }
+ 
 
  
 
