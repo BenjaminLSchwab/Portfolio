@@ -33,3 +33,12 @@ nav{
     background-size: 10%;
     background-position: center 48%;
 }
+
+.StarDust{
+    background-color: white;
+    background-size: 1%;
+}
+
+body{
+    background-color: black;
+}
