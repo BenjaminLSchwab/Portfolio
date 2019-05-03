@@ -13,7 +13,7 @@ nav{
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -10;
+    z-index: 0;
 }
 
 
@@ -35,8 +35,12 @@ nav{
 }
 
 .StarDust{
-    background-color: white;
-    background-size: 1%;
+    color: white;
+    position: fixed;
+    top: 3em;
+    left: 4em;
+    font-size: 4em;
+
 }
 
 body{

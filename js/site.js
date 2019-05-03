@@ -5,6 +5,9 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  var BlueSquare = document.getElementById("BlueSquare");
  var GreySquare = document.getElementById("GreySquare");
  var Display = document.getElementById("Display");
+ var StarDustPieces = new Array();
+ var StarDustCounters = new Array();
+ CreateStarDust();
 
  var counter = 0.0;
  var CountingUp = true;
@@ -14,22 +17,25 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  function scrollLoop(e){
      
     OrbitCounter();
+    MoveStarDust();
+    
 
     yScrollPos = window.scrollY; //get scrollbar position
     var GreySquarexVal = 70 * Math.sin(counter * 0.4);
     //  parallaxTranslate(-0.2, BigYellowCircle); //negative because scrollbar moves down and I want the element to move up
     //  parallaxTranslate(-0.4, GreenPentagon);
-    parallaxTranslate(-0.6, BlueSquare);
     GreySquare.style.transform = "translate(" + GreySquarexVal + "em, "+GreySquarexVal * .1+"em)";
-    swapZ(GreySquare, 100, CountingUp);
+    swapZ(GreySquare, 1, CountingUp);
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
  }
  
  //Translates an object using element style
- function parallaxTranslate(parallaxValue, el){
+ function parallaxScrollTranslate(parallaxValue, el){
      el.style.transform = "translate3d(0, " + yScrollPos * parallaxValue + "em, 0)" ; 
  }
+
+
 
  function OrbitCounter(){
      var percentToGoal = Math.abs( counter / (Math.PI/2));
@@ -81,6 +87,34 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
    }
 
    return start + increment;
+ }
+
+ function CreateStarDust(){
+    var dust = document.createElement("div");
+    dust.classList.add("StarDust");
+    dust.style.zIndex = Math.floor((Math.random() * 10) -5);
+    var body = document.getElementById("B");
+    body.style.zIndex = -100;
+    var dustText = document.createTextNode(".");
+    dust.appendChild(dustText);
+    body.appendChild(dust);
+    console.log("dust created");
+    StarDustPieces.push(dust);
+    StarDustCounters.push(0);
+ }
+
+ function MoveStarDust(){
+    var i;
+    StarDustPieces.forEach(element => {
+
+       console.log("inside element loop" + element);
+      element.style.transform = "translate3d("+ (StarDustCounters[i] - 5) * (element.zIndex + 6)  * 0.1+"em, 0, 0)" ;
+      
+
+      StarDustCounters[i] -= 5;
+
+      i++;
+    });
  }
  
 
