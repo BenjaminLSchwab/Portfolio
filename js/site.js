@@ -104,10 +104,10 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  }
 
  function MoveStarDust(){
-    var i;
+    var i = 0;
     StarDustPieces.forEach(element => {
 
-       console.log("inside element loop" + element);
+       console.log(StarDustCounters[i]);
       element.style.transform = "translate3d("+ (StarDustCounters[i] - 5) * (element.zIndex + 6)  * 0.1+"em, 0, 0)" ;
       
 
