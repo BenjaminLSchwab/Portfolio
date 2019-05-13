@@ -21,8 +21,7 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
     OrbitCounter();
     //MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
-    var GreySquareVal = PointOnCircle(greySquareRad, 14);
-    //var MoonDepth = PointOnCircle(greySquareRad - (Math.PI / 2), 14);
+    var GreySquareVal = PointOnCircle(greySquareRad, 20);
 
 
     yScrollPos = window.scrollY; //get scrollbar position
@@ -30,7 +29,7 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
     //  parallaxTranslate(-0.2, BigYellowCircle); //negative because scrollbar moves down and I want the element to move up
     //  parallaxTranslate(-0.4, GreenPentagon);
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
-    GreySquare.style.zVal = MoonDepth.xpos;
+    GreySquare.style.zIndex = Math.round(GreySquareVal.ypos);
 
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
