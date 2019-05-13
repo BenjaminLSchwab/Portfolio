@@ -13,22 +13,25 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  var CountingUp = true;
  var greySquareRad = 0;
  
+ 
  var yScrollPos;
 
  function scrollLoop(e){
      
     OrbitCounter();
-    MoveStarDust();
-    greySquareRad = GetRadianForOrbit(greySquareRad);
-    var GreySquareVal = PointOnCircle(greySquareRad, 4);
+    //MoveStarDust();
+    greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
+    var GreySquareVal = PointOnCircle(greySquareRad, 14);
+    //var MoonDepth = PointOnCircle(greySquareRad - (Math.PI / 2), 14);
+
 
     yScrollPos = window.scrollY; //get scrollbar position
     //var GreySquarexVal = 70 * Math.sin(counter * 0.4);
     //  parallaxTranslate(-0.2, BigYellowCircle); //negative because scrollbar moves down and I want the element to move up
     //  parallaxTranslate(-0.4, GreenPentagon);
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
-    GreySquare.style.zIndex = GreySquareVal.ypos;
-    //swapZ(GreySquare, 1, CountingUp);
+    GreySquare.style.zVal = MoonDepth.xpos;
+
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
  }
@@ -106,11 +109,10 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
     StarDustCounters.push(0);
  }
 
- function MoveStarDust(){
+ function MoveStarDust(){ // not currently being  called anywhere
     var i = 0;
     StarDustPieces.forEach(element => {
 
-       console.log(StarDustCounters[i]);
       element.style.transform = "translate3d("+ (StarDustCounters[i] - 5) * (element.zIndex + 6)  * 0.1+"em, 0, 0)" ;
       
 
