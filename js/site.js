@@ -5,8 +5,7 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  var BlueSquare = document.getElementById("BlueSquare");
  var GreySquare = document.getElementById("GreySquare");
  var Display = document.getElementById("Display");
- var StarDustPieces = new Array();
- var StarDustCounters = new Array();
+ var StarDustPieces = new Array()
  CreateStarDust();
 
  var counter = 0.0;
@@ -19,9 +18,9 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  function scrollLoop(e){
      
     OrbitCounter();
-    //MoveStarDust();
+    MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
-    var GreySquareVal = PointOnCircle(greySquareRad, 20);
+    var GreySquareVal = PointOnCircle(greySquareRad, 12);
 
 
     yScrollPos = window.scrollY; //get scrollbar position
@@ -95,31 +94,36 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  }
 
  function CreateStarDust(){
-    var dust = document.createElement("div");
-    dust.classList.add("StarDust");
-    dust.style.zIndex = Math.floor((Math.random() * 10) -5);
+    var dustObject = new Object();
+    var dustDiv = document.createElement("div");
+    dustObject.element = dustDiv;
+    dustObject.posCounter = 0;
+    dustDiv.classList.add("StarDust");
+    dustDiv.style.zIndex = Math.floor((Math.random() * 10) -5);
     var body = document.getElementById("B");
     body.style.zIndex = -100;
     var dustText = document.createTextNode(".");
-    dust.appendChild(dustText);
-    body.appendChild(dust);
+    dustDiv.appendChild(dustText);
+    body.appendChild(dustDiv);
     console.log("dust created");
-    StarDustPieces.push(dust);
-    StarDustCounters.push(0);
+    StarDustPieces.push(dustObject);
  }
 
- function MoveStarDust(){ // not currently being  called anywhere
-    var i = 0;
-    StarDustPieces.forEach(element => {
 
-      element.style.transform = "translate3d("+ (StarDustCounters[i] - 5) * (element.zIndex + 6)  * 0.1+"em, 0, 0)" ;
-      
+ function MoveStarDust(){
+    StarDustPieces.forEach(dustObject => {
+       dustObject.element.style.transform = "translate("+ dustObject.posCounter + "em, 0)"; 
+       dustObject.posCounter -= 0.1;
 
-      StarDustCounters[i] -= 5;
-
-      i++;
+       if(dustObject.posCounter < 10){
+         delete dustObject;
+       }
     });
  }
+
+ //create star dust
+   // create div with styling to look like particle
+   // 
  
 
  

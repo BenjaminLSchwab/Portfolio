@@ -34,14 +34,14 @@ nav li{
 
 #BlueSquare{
     background-image: url(../images/BlueSquare.png);
-    background-size: 15%;
+    background-size: 90px;
     background-position: center 55%;
 }
 
 #GreySquare{
     background-image: url(../images/GreySquare.png);
-    background-size: 10%;
-    background-position: center 48%;
+    background-size: 50px;
+    background-position: center 53%;
 }
 
 .StarDust{
