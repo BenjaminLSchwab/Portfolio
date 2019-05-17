@@ -47,12 +47,11 @@ nav li{
 .StarDust{
     color: white;
     position: fixed;
-    top: 3em;
-    left: 4em;
-    font-size: 4em;
+    font-size: 1em;
 
 }
 
 body{
     background-color: black;
+    z-index: -100;
 }

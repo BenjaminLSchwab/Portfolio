@@ -6,18 +6,16 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  var GreySquare = document.getElementById("GreySquare");
  var Display = document.getElementById("Display");
  var StarDustPieces = new Array()
- CreateStarDust();
 
- var counter = 0.0;
- var CountingUp = true;
+
  var greySquareRad = 0;
+ var dustCounter = 0;
  
  
  var yScrollPos;
 
  function scrollLoop(e){
-     
-    OrbitCounter();
+    StarDustLoop(60);
     MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
@@ -41,23 +39,6 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
 
 
 
- function OrbitCounter(){
-     var percentToGoal = Math.abs( counter / (Math.PI/2));
-    //  Display.innerHTML = percentToGoal;
-     var slow = Math.max( 1 - (percentToGoal * .8), 0.2) * 1.5;
-
-
-     if(Math.abs(counter) > (Math.PI/2)){
-        CountingUp = (!CountingUp);
-     }
-
-     if(CountingUp){
-        counter += (Math.PI / 100) * slow;
-     }
-     else{
-        counter -= (Math.PI / 100) * slow;
-     }
- }
 
  function swapZ(obj, zVal, toggle){
     if(toggle){
@@ -94,14 +75,17 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  }
 
  function CreateStarDust(){
+    var body = document.getElementById("B");
     var dustObject = new Object();
     var dustDiv = document.createElement("div");
     dustObject.element = dustDiv;
     dustObject.posCounter = 0;
     dustDiv.classList.add("StarDust");
     dustDiv.style.zIndex = Math.floor((Math.random() * 10) -5);
-    var body = document.getElementById("B");
-    body.style.zIndex = -100;
+    var topAmount = ((Math.random() * 80)).toString() + "em";
+    var leftAmount = ((Math.random() * 10) + 100).toString() + "em";
+    dustDiv.style.top = topAmount;
+    dustDiv.style.left = leftAmount;
     var dustText = document.createTextNode(".");
     dustDiv.appendChild(dustText);
     body.appendChild(dustDiv);
@@ -112,18 +96,23 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
 
  function MoveStarDust(){
     StarDustPieces.forEach(dustObject => {
-       dustObject.element.style.transform = "translate("+ dustObject.posCounter + "em, 0)"; 
-       dustObject.posCounter -= 0.1;
+       dustObject.element.style.transform = "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex - 5) + "em, 0)"; 
+       dustObject.posCounter += 0.004;
 
-       if(dustObject.posCounter < 10){
+       if(dustObject.posCounter > 3){
          delete dustObject;
        }
     });
  }
 
- //create star dust
-   // create div with styling to look like particle
-   // 
+function StarDustLoop(timeBetweenParticles){
+   dustCounter += Math.random() + 0.1;
+   if(dustCounter > timeBetweenParticles){
+      dustCounter = 0;
+      CreateStarDust();
+   }
+
+}
  
 
  
