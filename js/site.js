@@ -1,5 +1,12 @@
 window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollLoop function to be called once at start
  
+//Solar System Settings
+var removeDustAt = 120; //used to determine how long after dust has spawned to wipe it from the screen
+var dustSpeed = 0.005;
+var dustCreationRate = 50;
+var dustVertSpread = 80;
+var dustHorizontalSpread = 10;
+var dustHorizontalPush = 100;
 
 
  var BlueSquare = document.getElementById("BlueSquare");
@@ -8,25 +15,24 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  var StarDustPieces = new Array()
 
 
- var greySquareRad = 0;
- var dustCounter = 0;
+ var greySquareRad = 0; // used to keep track of where the moon is on its orbit
+ var dustCounter = 0; //used in dust creation
  
  
  var yScrollPos;
 
  function scrollLoop(e){
-    StarDustLoop(60);
+    StarDustLoop(dustCreationRate);
     MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
 
 
     yScrollPos = window.scrollY; //get scrollbar position
-    //var GreySquarexVal = 70 * Math.sin(counter * 0.4);
-    //  parallaxTranslate(-0.2, BigYellowCircle); //negative because scrollbar moves down and I want the element to move up
-    //  parallaxTranslate(-0.4, GreenPentagon);
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
     GreySquare.style.zIndex = Math.round(GreySquareVal.ypos);
+
+    console.log("Dust Count: " + StarDustPieces.length);
 
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
@@ -76,37 +82,50 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
 
  function CreateStarDust(){
     var body = document.getElementById("B");
-    var dustObject = new Object();
-    var dustDiv = document.createElement("div");
-    dustObject.element = dustDiv;
+
+    var dustObject = new Object(); // object is added to array and used to track position of dust over time
     dustObject.posCounter = 0;
+
+    var dustDiv = document.createElement("div");
     dustDiv.classList.add("StarDust");
     dustDiv.style.zIndex = Math.floor((Math.random() * 10) -5);
-    var topAmount = ((Math.random() * 80)).toString() + "em";
-    var leftAmount = ((Math.random() * 10) + 100).toString() + "em";
+
+    dustObject.element = dustDiv;
+
+    var topAmount = ((Math.random() * dustVertSpread)).toString() + "em";
+    var leftAmount = ((Math.random() * dustHorizontalSpread) + dustHorizontalPush).toString() + "em";
     dustDiv.style.top = topAmount;
     dustDiv.style.left = leftAmount;
+
     var dustText = document.createTextNode(".");
     dustDiv.appendChild(dustText);
+
     body.appendChild(dustDiv);
-    console.log("dust created");
     StarDustPieces.push(dustObject);
  }
 
 
- function MoveStarDust(){
+ function MoveStarDust(){ // moves each piece of star dust on the screen
+   var dustIndex = 0;
     StarDustPieces.forEach(dustObject => {
-       dustObject.element.style.transform = "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex - 5) + "em, 0)"; 
-       dustObject.posCounter += 0.004;
+       dustObject.element.style.transform =
+         "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex - 5) + "em, 0)"; 
+       dustObject.posCounter += dustSpeed;
 
-       if(dustObject.posCounter > 3){
-         delete dustObject;
+       if(dustObject.posCounter * Math.abs(dustObject.element.style.zIndex - 5) > removeDustAt){ //delete star dust if it has drifted far enough
+          StarDustPieces.splice(dustIndex,1);
+          dustObject.element.parentNode.removeChild(dustObject.element);
+          delete dustObject;
+          dustIndex--; 
+
        }
+
+       dustIndex++;
     });
  }
 
-function StarDustLoop(timeBetweenParticles){
-   dustCounter += Math.random() + 0.1;
+function StarDustLoop(timeBetweenParticles){ // creates dust at slightly random intervals
+   dustCounter += (Math.random() + 0.1) * 0.5;
    if(dustCounter > timeBetweenParticles){
       dustCounter = 0;
       CreateStarDust();
