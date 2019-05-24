@@ -3,10 +3,10 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
 //Solar System Settings
 var removeDustAt = 120; //used to determine how long after dust has spawned to wipe it from the screen
 var dustSpeed = 0.005;
-var dustCreationRate = 50;
 var dustVertSpread = 80;
 var dustHorizontalSpread = 10;
 var dustHorizontalPush = 100;
+var dustCount = 35;
 
 
  var BlueSquare = document.getElementById("BlueSquare");
@@ -21,8 +21,10 @@ var dustHorizontalPush = 100;
  
  var yScrollPos;
 
+ SpawnStarDust();
+
  function scrollLoop(e){
-    StarDustLoop(dustCreationRate);
+    //StarDustLoop(dustCreationRate);
     MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
@@ -38,24 +40,12 @@ var dustHorizontalPush = 100;
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
  }
  
- //Translates an object using element style
+ //Translates an object using element style and scrollbar position
  function parallaxScrollTranslate(parallaxValue, el){
      el.style.transform = "translate3d(0, " + yScrollPos * parallaxValue + "em, 0)" ; 
  }
 
-
-
-
- function swapZ(obj, zVal, toggle){
-    if(toggle){
-        obj.style.zIndex = zVal;
-    }
-    else{
-        obj.style.zIndex = -zVal;
-    }
- }
-
- function PointOnCircle(radians, radius){
+ function PointOnCircle(radians, radius){ //gives the x and y position of a point on a circle given the radius and angle in radians
     var xpos = radius * Math.sin(radians);
     var ypos = radius * Math.cos(radians);
     return {xpos, ypos};
@@ -80,12 +70,20 @@ var dustHorizontalPush = 100;
    return start + increment;
  }
 
+ function SpawnStarDust(){
+   var i;
+   for( i = 0; i < dustCount; i++){
+      CreateStarDust();
+   }
+}
+
+
  function CreateStarDust(){
     var body = document.getElementById("B");
 
     var dustObject = new Object(); // object is added to array and used to track position of dust over time
-    dustObject.posCounter = 0;
-
+    dustObject.posCounter = Math.random() * 12;
+    
     var dustDiv = document.createElement("div");
     dustDiv.classList.add("StarDust");
     dustDiv.style.zIndex = Math.floor((Math.random() * 10) -5);
@@ -112,11 +110,13 @@ var dustHorizontalPush = 100;
          "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex - 5) + "em, 0)"; 
        dustObject.posCounter += dustSpeed;
 
-       if(dustObject.posCounter * Math.abs(dustObject.element.style.zIndex - 5) > removeDustAt){ //delete star dust if it has drifted far enough
-          StarDustPieces.splice(dustIndex,1);
-          dustObject.element.parentNode.removeChild(dustObject.element);
-          delete dustObject;
-          dustIndex--; 
+       if(dustObject.posCounter * Math.abs(dustObject.element.style.zIndex - 5) > removeDustAt){ //recycle star dust if it has drifted far enough
+          //StarDustPieces.splice(dustIndex,1);
+          //dustObject.element.parentNode.removeChild(dustObject.element);
+          //delete dustObject;
+          //dustIndex--; 
+
+          dustObject.posCounter = (Math.random() * -2);
 
        }
 
@@ -124,14 +124,7 @@ var dustHorizontalPush = 100;
     });
  }
 
-function StarDustLoop(timeBetweenParticles){ // creates dust at slightly random intervals
-   dustCounter += (Math.random() + 0.1) * 0.5;
-   if(dustCounter > timeBetweenParticles){
-      dustCounter = 0;
-      CreateStarDust();
-   }
 
-}
  
 
  
