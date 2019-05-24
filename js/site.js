@@ -1,7 +1,6 @@
 window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollLoop function to be called once at start
  
-//Solar System Settings
-var removeDustAt = 120; //used to determine how long after dust has spawned to wipe it from the screen
+//Dust Settings
 var dustSpeed = 0.005;
 var dustVertSpread = 80;
 var dustHorizontalSpread = 10;
@@ -9,12 +8,16 @@ var dustHorizontalPush = 100;
 var dustCount = 35;
 
 
- var BlueSquare = document.getElementById("BlueSquare");
- var GreySquare = document.getElementById("GreySquare");
- var Display = document.getElementById("Display");
- var StarDustPieces = new Array()
+var BlueSquare = document.getElementById("BlueSquare");
+var GreySquare = document.getElementById("GreySquare");
+var Display = document.getElementById("Display");
+var StarDustPieces = new Array();
 
 
+console.log(window.innerWidth);
+
+
+var removeDustAt; //used to determine how long after dust has spawned to recycle
  var greySquareRad = 0; // used to keep track of where the moon is on its orbit
  var dustCounter = 0; //used in dust creation
  
@@ -24,7 +27,7 @@ var dustCount = 35;
  SpawnStarDust();
 
  function scrollLoop(e){
-    //StarDustLoop(dustCreationRate);
+   removeDustAt = (window.innerWidth / 10) + 40;
     MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
@@ -103,7 +106,7 @@ var dustCount = 35;
  }
 
 
- function MoveStarDust(){ // moves each piece of star dust on the screen
+ function MoveStarDust(){ // moves each piece of star dust on the screen, moves back to start after it goes off screen
    var dustIndex = 0;
     StarDustPieces.forEach(dustObject => {
        dustObject.element.style.transform =
@@ -111,10 +114,6 @@ var dustCount = 35;
        dustObject.posCounter += dustSpeed;
 
        if(dustObject.posCounter * Math.abs(dustObject.element.style.zIndex - 5) > removeDustAt){ //recycle star dust if it has drifted far enough
-          //StarDustPieces.splice(dustIndex,1);
-          //dustObject.element.parentNode.removeChild(dustObject.element);
-          //delete dustObject;
-          //dustIndex--; 
 
           dustObject.posCounter = (Math.random() * -2);
 
