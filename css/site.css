@@ -2,6 +2,9 @@ html{
     scroll-behavior: smooth;
 }
 
+h3{
+    color:#EDC264 ;
+}
 
 nav{
     border: 1em;
@@ -9,7 +12,7 @@ nav{
 }
 
 nav a{
-    background-color: cornflowerblue;
+    background-color: rgb(100, 149, 237);
     color: white;
     font-size: 2em;
     padding-left: 0.2em;
@@ -18,7 +21,7 @@ nav a{
 }
 
 nav a:hover{
-    color: rgb(255, 165, 0);
+    color: #EDC264;
 }
 
 nav li{

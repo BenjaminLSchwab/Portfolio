@@ -27,7 +27,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
  SpawnStarDust();
 
  function scrollLoop(e){
-   removeDustAt = (window.innerWidth / 10) + 40;
+   removeDustAt = (window.innerWidth / 14) + 30;// need to do some serious math to figure out the best way to get this number. 
     MoveStarDust();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
@@ -85,7 +85,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     var body = document.getElementById("B");
 
     var dustObject = new Object(); // object is added to array and used to track position of dust over time
-    dustObject.posCounter = Math.random() * 12;
+    dustObject.posCounter = Math.random() * 2;
     
     var dustDiv = document.createElement("div");
     dustDiv.classList.add("StarDust");
@@ -107,19 +107,16 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
 
  function MoveStarDust(){ // moves each piece of star dust on the screen, moves back to start after it goes off screen
-   var dustIndex = 0;
     StarDustPieces.forEach(dustObject => {
        dustObject.element.style.transform =
-         "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex - 5) + "em, 0)"; 
+         "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex + 40) * 0.02  + "em, 0)"; 
        dustObject.posCounter += dustSpeed;
 
        if(dustObject.posCounter * Math.abs(dustObject.element.style.zIndex - 5) > removeDustAt){ //recycle star dust if it has drifted far enough
 
-          dustObject.posCounter = (Math.random() * -2);
+          dustObject.posCounter = (Math.random() * -0.3);
 
        }
-
-       dustIndex++;
     });
  }
 
