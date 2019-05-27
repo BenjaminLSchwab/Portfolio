@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollLoop function to be called once at start
  
 //Dust Settings
-var dustSpeed = 0.005;
+var dustSpeed = 0.003;
 var dustVertSpread = 80;
 var dustHorizontalSpread = 10;
 var dustHorizontalPush = 100;
@@ -35,7 +35,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
     yScrollPos = window.scrollY; //get scrollbar position
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
-    GreySquare.style.zIndex = Math.round(GreySquareVal.ypos);
+    GreySquare.style.zIndex = Math.round(GreySquareVal.ypos) - 50;
 
     console.log("Dust Count: " + StarDustPieces.length);
 
@@ -89,7 +89,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     
     var dustDiv = document.createElement("div");
     dustDiv.classList.add("StarDust");
-    dustDiv.style.zIndex = Math.floor((Math.random() * 10) -5);
+    dustDiv.style.zIndex = Math.floor((Math.random() * 10) -50);
 
     dustObject.element = dustDiv;
 

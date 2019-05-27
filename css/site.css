@@ -23,7 +23,7 @@ nav li{
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 0;
+    z-index: -30;
 }
 
 
@@ -53,5 +53,16 @@ nav li{
 
 body{
     background-color: black;
-    z-index: -100;
+    /* z-index: -100; */
+}
+
+.MainContentBox > p{
+    font-family: sans-serif; 
+    font-size: 1.3em;
+    color: cornflowerblue;
+    z-index: 100;
+    margin-left: 2em;
+    margin-right: 2em;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: inherit;
 }
