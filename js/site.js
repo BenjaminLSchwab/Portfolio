@@ -85,7 +85,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     var body = document.getElementById("B");
 
     var dustObject = new Object(); // object is added to array and used to track position of dust over time
-    dustObject.posCounter = Math.random() * 2;
+    dustObject.posCounter = (Math.random() * 4) - 1;
     
     var dustDiv = document.createElement("div");
     dustDiv.classList.add("StarDust");
