@@ -11,7 +11,9 @@ var dustCount = 35;
 var BlueSquare = document.getElementById("BlueSquare");
 var GreySquare = document.getElementById("GreySquare");
 var Display = document.getElementById("Display");
+var NavBar = document.getElementById("NavBar");
 var StarDustPieces = new Array();
+var showNav = true;
 
 
 console.log(window.innerWidth);
@@ -36,8 +38,6 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     yScrollPos = window.scrollY; //get scrollbar position
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
     GreySquare.style.zIndex = Math.round(GreySquareVal.ypos) - 50;
-
-    console.log("Dust Count: " + StarDustPieces.length);
 
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
@@ -118,6 +118,17 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
        }
     });
+ }
+
+ function ToggleNav(){
+    if(showNav){
+      NavBar.className = "navbar-hidden"
+      showNav = false;
+    }
+    else{
+       NavBar.className = "navbar-shown";
+       showNav = true;
+    }
  }
 
 
