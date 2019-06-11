@@ -7,6 +7,9 @@ var dustHorizontalSpread = 10;
 var dustHorizontalPush = 100;
 var dustCount = 35;
 
+//Menu settings
+var hideMenuAt = 1;
+
 
 var BlueSquare = document.getElementById("BlueSquare");
 var GreySquare = document.getElementById("GreySquare");
@@ -14,14 +17,11 @@ var Display = document.getElementById("Display");
 var NavBar = document.getElementById("NavBar");
 var StarDustPieces = new Array();
 var showNav = true;
-
-
-console.log(window.innerWidth);
+var hasScrolledDown = false;
 
 
 var removeDustAt; //used to determine how long after dust has spawned to recycle
  var greySquareRad = 0; // used to keep track of where the moon is on its orbit
- var dustCounter = 0; //used in dust creation
  
  
  var yScrollPos;
@@ -31,6 +31,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
  function scrollLoop(e){
    removeDustAt = (window.innerWidth / 14) + 30;// need to do some serious math to figure out the best way to get this number. 
     MoveStarDust();
+    CheckMenuStatus();
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
 
@@ -122,13 +123,40 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
  function ToggleNav(){
     if(showNav){
-      NavBar.className = "navbar-hidden"
+      NavBar.className = "navbar-hidden";
       showNav = false;
     }
     else{
        NavBar.className = "navbar-shown";
        showNav = true;
     }
+ }
+
+ function CheckMenuStatus(hideFromButton){
+    if(yScrollPos > hideMenuAt && !hasScrolledDown){
+      HideNav();
+      hasScrolledDown = true;
+    }
+
+    if(hasScrolledDown && yScrollPos == 0){
+      ShowNav();
+      hasScrolledDown = false;
+    }
+
+
+    //button can show or hide at any time
+    //scrolling should hide the menu
+    //scrolling to top should show the menu
+ }
+
+ function HideNav(){
+   NavBar.className = "navbar-hidden";
+   showNav = false;
+ }
+
+ function ShowNav(){
+   NavBar.className = "navbar-shown";
+   showNav = true;
  }
 
 
