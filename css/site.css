@@ -2,59 +2,18 @@ html{
     scroll-behavior: smooth;
 }
 
-h3{
-    color:#EDC264 ;
-}
-
-h2{
-    /* background-color: rgb(100, 149, 237);
-    color: white; */
-    color: #EDC264;
-    width: 65%;
-    font-size: 2.5em;
-    margin-left: 1em;
-    margin-top: 0.2em;
-    margin-bottom: 0.1em;
-    font-weight: 500;
+body{
+    background-color: black;
+    font-family: sans-serif;
+    /* z-index: -100; */
 }
 
 nav{
     position: fixed;
     top: 6em;
     width: 25%;
-    /* border-style: solid; */
-    border-color: white;
-    border-width: 0.1em;
-    border-radius: 0.4em;
     transition: margin-left 0.6s;
     
-}
-
-#HideNav{
-    border: none;
-    width: 5em;
-    height: 5em;
-    z-index: 100;
-    position: fixed;
-    top: 2em;
-    left: 4em;
-}
-
-.navbar-hidden{
-    margin-left: -40em;
-    transition: margin-left 0.6s;
-}
-
-.navbar-shown{
-    margin-left: 0;
-    transition: margin-left 0.6s;
-}
-
-
-#HideNav img{
-    width: 100%;
-    height: 100%;
-    transform: scaleX(-1);
 }
 
 nav a{
@@ -77,6 +36,60 @@ nav li{
     margin-bottom: 1em;
 }
 
+h3{
+    color:#EDC264 ;
+}
+
+h2{
+    color: #EDC264;
+    width: 65%;
+    font-size: 2.5em;
+    margin-left: 1em;
+    margin-top: 0.2em;
+    margin-bottom: 0.1em;
+    font-weight: 500;
+}
+
+
+
+#HideNav{
+    border: none;
+    width: 5em;
+    height: 5em;
+    z-index: 100;
+    position: fixed;
+    top: 2em;
+    left: 4em;
+    background-color: white;
+}
+
+#NavButtonImage{
+    width: 100%;
+    height: 100%;
+    transform: scaleX(-1);
+}
+
+#HideNav:hover{
+    background-color: white;
+}
+
+#About{
+    margin-top: 50em;
+}
+
+#BlueSquare{
+    background-image: url(../images/BlueSquare.png);
+    background-size: 90px;
+    background-position: center 55%;
+}
+
+#GreySquare{
+    background-image: url(../images/GreySquare.png);
+    background-size: 50px;
+    background-position: center 53%;
+}
+
+
 .animated{
     margin: auto;
     background-repeat: no-repeat;
@@ -94,18 +107,6 @@ nav li{
     height: 300%;
 }
 
-#BlueSquare{
-    background-image: url(../images/BlueSquare.png);
-    background-size: 90px;
-    background-position: center 55%;
-}
-
-#GreySquare{
-    background-image: url(../images/GreySquare.png);
-    background-size: 50px;
-    background-position: center 53%;
-}
-
 .StarDust{
     color: white;
     position: fixed;
@@ -113,11 +114,7 @@ nav li{
 
 }
 
-body{
-    background-color: black;
-    font-family: sans-serif;
-    /* z-index: -100; */
-}
+
 
 .MainContentBox{
      
@@ -139,15 +136,14 @@ body{
     
 }
 
-#About{
-    margin-top: 30em;
+.navbar-hidden{
+    margin-left: -40em;
+    transition: margin-left 0.6s;
 }
 
-/* .button-hidden{
-    background-image: ;
+.navbar-shown{
+    margin-left: 0;
+    transition: margin-left 0.6s;
 }
 
-.button-shown{
-    background-image: url(../images/Menu.png);
-} */
 

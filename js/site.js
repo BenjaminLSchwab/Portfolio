@@ -8,14 +8,14 @@ var dustHorizontalPush = 100;
 var dustCount = 35;
 
 //Menu settings
-var hideMenuAt = 100;
+var hideMenuAt = 100; //how far to scrol before hiding the nav menu
 
 
 var BlueSquare = document.getElementById("BlueSquare");
 var GreySquare = document.getElementById("GreySquare");
 var Display = document.getElementById("Display");
 var NavBar = document.getElementById("NavBar");
-var MenuButton = document.getElementById("ButtonImage");
+var ToggleNavButton = document.getElementById("NavButtonImage");
 var StarDustPieces = new Array();
 var showNav = true;
 var hasScrolledDown = false;
@@ -31,13 +31,15 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
  function scrollLoop(e){
    removeDustAt = (window.innerWidth / 14) + 30;// need to do some serious math to figure out the best way to get this number. 
+   yScrollPos = window.scrollY; //get scrollbar position
+
     MoveStarDust();
-    CheckMenuStatus();
+    NavScrollCheck();
+
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
 
 
-    yScrollPos = window.scrollY; //get scrollbar position
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
     GreySquare.style.zIndex = Math.round(GreySquareVal.ypos) - 50;
 
@@ -45,11 +47,6 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
  }
  
- //Translates an object using element style and scrollbar position
- function parallaxScrollTranslate(parallaxValue, el){
-     el.style.transform = "translate3d(0, " + yScrollPos * parallaxValue + "em, 0)" ; 
- }
-
  function PointOnCircle(radians, radius){ //gives the x and y position of a point on a circle given the radius and angle in radians
     var xpos = radius * Math.sin(radians);
     var ypos = radius * Math.cos(radians);
@@ -131,35 +128,30 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     }
  }
 
- function CheckMenuStatus(hideFromButton){
-    if(yScrollPos > hideMenuAt && !hasScrolledDown){
-      HideNav();
-      hasScrolledDown = true;
-    }
-
-    if(hasScrolledDown && yScrollPos == 0){
-      ShowNav();
-      hasScrolledDown = false;
-    }
-
-
-    //button can show or hide at any time
-    //scrolling should hide the menu
-    //scrolling to top should show the menu
- }
-
+ 
  function HideNav(){
-   NavBar.className = "navbar-hidden";
-   MenuButton.src = "../Portfolio/images/Menu.png";
-   showNav = false;
-}
-
-function ShowNav(){
-   NavBar.className = "navbar-shown";
-   MenuButton.src = "../Portfolio/images/Arrow.png";
-   showNav = true;
- }
-
+    NavBar.className = "navbar-hidden";
+    ToggleNavButton.src = "../Portfolio/images/Menu.png";
+    showNav = false;
+   }
+   
+   function ShowNav(){
+      NavBar.className = "navbar-shown";
+      ToggleNavButton.src = "../Portfolio/images/Arrow.png";
+      showNav = true;
+   }
+   
+   function NavScrollCheck(){
+      if(yScrollPos > hideMenuAt && !hasScrolledDown){
+        HideNav();
+        hasScrolledDown = true;
+      }
+  
+      if(hasScrolledDown && yScrollPos == 0){
+        ShowNav();
+        hasScrolledDown = false;
+      }
+   }
 
  
 
