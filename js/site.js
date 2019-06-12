@@ -8,13 +8,14 @@ var dustHorizontalPush = 100;
 var dustCount = 35;
 
 //Menu settings
-var hideMenuAt = 1;
+var hideMenuAt = 100;
 
 
 var BlueSquare = document.getElementById("BlueSquare");
 var GreySquare = document.getElementById("GreySquare");
 var Display = document.getElementById("Display");
 var NavBar = document.getElementById("NavBar");
+var MenuButton = document.getElementById("ButtonImage");
 var StarDustPieces = new Array();
 var showNav = true;
 var hasScrolledDown = false;
@@ -123,12 +124,10 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
  function ToggleNav(){
     if(showNav){
-      NavBar.className = "navbar-hidden";
-      showNav = false;
+      HideNav();
     }
     else{
-       NavBar.className = "navbar-shown";
-       showNav = true;
+       ShowNav();
     }
  }
 
@@ -151,11 +150,13 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
  function HideNav(){
    NavBar.className = "navbar-hidden";
+   MenuButton.src = "../Portfolio/images/Menu.png";
    showNav = false;
- }
+}
 
- function ShowNav(){
+function ShowNav(){
    NavBar.className = "navbar-shown";
+   MenuButton.src = "../Portfolio/images/Arrow.png";
    showNav = true;
  }
 
