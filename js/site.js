@@ -39,9 +39,10 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     greySquareRad = GetRadianForOrbit(greySquareRad, 0.3);
     var GreySquareVal = PointOnCircle(greySquareRad, 12);
 
-
-    GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0)";
+    var GreySquareScaleVal = (GreySquareVal.ypos / 33) + 1.2;
+    GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0) scaleX(" + GreySquareScaleVal + ") scaleY(" + GreySquareScaleVal + ")";
     GreySquare.style.zIndex = Math.round(GreySquareVal.ypos) - 50;
+    
 
 
     requestAnimationFrame(scrollLoop); //This is what makes the function loop
