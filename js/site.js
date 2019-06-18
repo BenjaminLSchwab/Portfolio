@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
  
 //Dust Settings
 var dustSpeed = 0.003;
-var dustVertSpread = 80;
+var dustVertSpread = window.innerHeight / 10;
 var dustHorizontalSpread = 10;
 var dustHorizontalPush = window.innerWidth / 10;
 var dustCount = 35;
