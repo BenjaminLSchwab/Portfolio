@@ -61,6 +61,7 @@ h2{
     top: 2em;
     left: 4em;
     background-color: #666666;
+    outline: none;
 }
 
 #NavButtonImage{
