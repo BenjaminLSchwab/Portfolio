@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollL
 var dustSpeed = 0.003;
 var dustVertSpread = 80;
 var dustHorizontalSpread = 10;
-var dustHorizontalPush = 100;
+var dustHorizontalPush = window.innerWidth / 10;
 var dustCount = 35;
 
 //Menu settings
