@@ -1,11 +1,13 @@
 window.addEventListener("DOMContentLoaded", scrollLoop, false); //causes scrollLoop function to be called once at start
  
 //Dust Settings
-var dustSpeed = 0.003;
+var dustSpeed = 0.5;
 var dustVertSpread = window.innerHeight / 10;
 var dustHorizontalSpread = 10;
 var dustHorizontalPush = window.innerWidth / 10;
 var dustCount = 35;
+var dustZlayer = -50;
+var dustZSpread = 5;
 
 //Menu settings
 var hideMenuAt = 100; //how far to scrol before hiding the nav menu
@@ -41,7 +43,7 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
     var GreySquareScaleVal = (GreySquareVal.ypos / 33) + 1.2;
     GreySquare.style.transform = "translate(" + GreySquareVal.xpos + "em, 0) scaleX(" + GreySquareScaleVal + ") scaleY(" + GreySquareScaleVal + ")";
-    GreySquare.style.zIndex = Math.round(GreySquareVal.ypos) - 50;
+    GreySquare.style.zIndex = Math.round(GreySquareVal.ypos) + dustZlayer;
     
 
 
@@ -85,22 +87,29 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
     var body = document.getElementById("B");
 
     var dustObject = new Object(); // object is added to array and used to track position of dust over time
-    dustObject.posCounter = (Math.random() * 4) - 1;
     
     var dustDiv = document.createElement("div");
     dustDiv.classList.add("StarDust");
-    dustDiv.style.zIndex = Math.floor((Math.random() * 10) -50);
-
+    dustDiv.style.zIndex = Math.floor((Math.random() * dustZSpread) + dustZlayer);
+    
     dustObject.element = dustDiv;
-
-    var topAmount = ((Math.random() * dustVertSpread)).toString() + "em";
-    var leftAmount = ((Math.random() * dustHorizontalSpread) + dustHorizontalPush).toString() + "em";
-    dustDiv.style.top = topAmount;
-    dustDiv.style.left = leftAmount;
-
+    
+    //  var topAmount = ((Math.random() * dustVertSpread)).toString() + "em";
+    //  var leftAmount = ((Math.random() * dustHorizontalSpread) + dustHorizontalPush).toString() + "em";
+    
+    dustObject.topNumber = Math.random() * window.innerHeight;
+    dustObject.leftNumber = Math.random() * window.innerWidth;
+    
+    var topString = dustObject.topNumber.toString() + "px";
+    var leftString = dustObject.leftNumber.toString() + "px";
+    
+    dustDiv.style.top = topString;
+    dustDiv.style.left = leftString;
+    
     var dustText = document.createTextNode(".");
     dustDiv.appendChild(dustText);
-
+    dustObject.posCounter = -1 * (Math.random() * dustObject.leftNumber) / (dustObject.element.style.zIndex - dustZlayer + 1);
+    
     body.appendChild(dustDiv);
     StarDustPieces.push(dustObject);
  }
@@ -108,13 +117,15 @@ var removeDustAt; //used to determine how long after dust has spawned to recycle
 
  function MoveStarDust(){ // moves each piece of star dust on the screen, moves back to start after it goes off screen
     StarDustPieces.forEach(dustObject => {
+       var dustCurrentPosInPx = dustObject.posCounter * (dustObject.element.style.zIndex - dustZlayer + 1);// +1 so that dust at -50 can still move
        dustObject.element.style.transform =
-         "translate("+ dustObject.posCounter * (dustObject.element.style.zIndex + 40) * 0.02  + "em, 0)"; 
+         "translate("+ dustCurrentPosInPx * -1  + "px, 0)"; 
        dustObject.posCounter += dustSpeed;
+       
+      
+       if(dustCurrentPosInPx > dustObject.leftNumber){ //recycle star dust if it has drifted far enough
 
-       if(dustObject.posCounter * Math.abs(dustObject.element.style.zIndex - 5) > removeDustAt){ //recycle star dust if it has drifted far enough
-
-          dustObject.posCounter = (Math.random() * -0.3);
+          dustObject.posCounter = (-1 * window.innerWidth + (Math.random() * dustObject.leftNumber)) / (dustObject.element.style.zIndex - dustZlayer + 1);
 
        }
     });
