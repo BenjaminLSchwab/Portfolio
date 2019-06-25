@@ -3,7 +3,6 @@ html{
 }
 
 body{
-    background-color: black;
     font-family: sans-serif;
     margin: 0;
     /* z-index: -100; */
@@ -73,6 +72,10 @@ h2{
 
 #HideNav:hover{
     background-color: white;
+}
+
+#B{
+    background-color: black;
 }
 
 #About{
