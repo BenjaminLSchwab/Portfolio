@@ -135,8 +135,18 @@ h2{
     padding-top: 0.03em;
     padding-bottom: 0.03em;
     
+    
 }
 
+.ProjectBox{
+    background-color: rgba(219, 186, 116, 0.842);
+    border-style: solid;
+    border-color: #666666;
+    border-width: 0.2em;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+}
 .navbar-hidden{
     margin-left: -40em;
     transition: margin-left 0.6s;
