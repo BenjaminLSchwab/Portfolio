@@ -133,7 +133,8 @@ h2{
     padding-left: 12em;
     padding-right: 12em;
     padding-top: 0.03em;
-    padding-bottom: 0.03em;
+    padding-bottom: 0.3em;
+    overflow: auto;
     
     
 }
@@ -160,6 +161,7 @@ h2{
 .profile{
     width: 12em;
     float: right;
+
 }
 
 .ContentBoxTitle{
