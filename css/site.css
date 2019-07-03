@@ -147,11 +147,17 @@ h2{
     border-radius: 1em;
     padding: 1em;
     margin: 1em;
+    overflow: auto;
+    text-align: center;
+    
 }
 
 .ProjectImage{
- background-position: 0%;
- background-size: 100%;
+ background-size: 30%;
+ text-align: center;
+ background-repeat: no-repeat;
+ background-position-x: 50%;
+
 }
 
 .ProjectIcon{
