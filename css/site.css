@@ -105,19 +105,6 @@ h2{
     z-index: -40;
 }
 
-.bg1{
-    background-color: #666666;
-}
-
-.bg2{
-    background-color:#EDC264 ;
-}
-
-.bg3{
-    background-color: rgb(100, 149, 237);
-}
-
-
 
 .backgroundforParralax{
     height: 300%;
@@ -135,7 +122,6 @@ h2{
 .MainContentBox{
      
     font-size: 1.3em;
-    color: white;
     z-index: 100;
     margin-left: 0;
     margin-right: 0;
