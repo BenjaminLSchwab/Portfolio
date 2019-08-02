@@ -14,8 +14,8 @@
 } */
 
 
-/* ===================Sea foam====================== */
-.bg1{
+/* ===================Blue-Green====================== */
+/* .bg1{
     background-color: rgb( 6, 66, 92);
 }
 
@@ -24,7 +24,7 @@
 }
 
 .bg3{
-    background-color: rgb(183, 105, 92);
+    background-color: #3C8FB2;
 }
 
 .txt1{
@@ -32,6 +32,35 @@
 }
 
 .txt2{
-    color: rgb(183, 105, 92);
+    color: rgb(205, 187, 121);
+}
+
+nav a:hover{
+    color: rgb(205, 187, 121);
+} */
+
+/* ===================Imperial====================== */
+.bg1{
+    background-color: rgb( 6, 66, 92);
+}
+
+.bg2{
+    background-color: #424C55;
+}
+
+.bg3{
+    background-color: #D1CCDC;
+}
+
+.txt1{
+    color:#F2F2F2 ;
+}
+
+.txt2{
+    color: #E8C547;
+}
+
+nav a:hover{
+    color: #E8C547;
 }
 
