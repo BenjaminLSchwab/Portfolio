@@ -40,7 +40,7 @@ nav a:hover{
 } */
 
 /* ===================Imperial====================== */
-.bg1{
+/* .bg1{
     background-color: rgb( 6, 66, 92);
 }
 
@@ -62,5 +62,30 @@ nav a:hover{
 
 nav a:hover{
     color: #E8C547;
+} */
+
+/* ===================BoldBlue====================== */
+.bg1{
+    background-color: #0B132B;
+}
+
+.bg2{
+    background-color: #1C2541;
+}
+
+.bg3{
+    background-color: #3A506B;
+}
+
+.txt1{
+    color:whitesmoke ;
+}
+
+.txt2{
+    color: #6FFFE9;
+}
+
+nav a:hover{
+    color: #6FFFE9;
 }
 
